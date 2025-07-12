@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>tj said shop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+        body {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #e53935 100%);
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://static.wikia.nocookie.net/freefire/images/2/2e/Background_Lobby.jpg') center/cover no-repeat;
+            opacity: 0.13;
+            z-index: 0;
+            pointer-events: none;
+        }
+        header {
+            background: linear-gradient(90deg, #ffb300 0%, #e53935 100%);
+            color: #fff;
+            padding: 32px 0 18px 0;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+            border-radius: 0 0 24px 24px;
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #000, 0 0 10px #ffb300;
+        }
+        .container {
+            width: 95%;
+            max-width: 1300px;
+            margin: 32px auto 24px auto;
+            padding: 32px 28px 28px 28px;
+            background: rgba(30,30,30,0.92);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(229,57,53,0.10), 0 2px 0 #ffb300;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            text-align: center;
+            color: #ffb300;
+            margin-bottom: 38px;
+            font-size: 2.1em;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 6px #000;
+        }
+        .diamond-packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+        .package-item {
+            border: 2px solid #ffb300;
+            border-radius: 14px;
+            padding: 18px 10px 20px 10px;
+            text-align: center;
+            background: linear-gradient(120deg, #232323 60%, #e53935 120%);
+            box-shadow: 0 4px 18px rgba(229,57,53,0.15), 0 1.5px 0 #ffb300;
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+        .package-item::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, #ffb300 0%, #e53935 100%);
+            border-radius: 14px 14px 0 0;
+            opacity: 0.7;
+        }
+        .package-item:hover {
+            transform: scale(1.04) rotate(-1deg);
+            box-shadow: 0 8px 32px 0 #e53935cc, 0 2px 0 #ffb300;
+        }
+        .package-item img {
+            max-width: 90px;
+            height: 90px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 2px solid #ffb300;
+            background: #fff3e0;
+        }
+        .package-item h3 {
+            margin: 0 0 10px 0;
+            color: #ffb300;
+            font-size: 1.25em;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 4px #000;
+        }
+        .package-item p {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px #e53935;
+        }
+        .package-item button {
+            background: linear-gradient(90deg, #ffb300 0%, #e53935 100%);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 12px 28px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #e5393555, 0 0 8px #ffb30099;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .package-item button:hover {
+            background: linear-gradient(90deg, #e53935 0%, #ffb300 100%);
+            box-shadow: 0 4px 16px #ffb300cc, 0 0 16px #e53935cc;
+            transform: scale(1.07);
+        }
+        /* Главное меню */
+        .main-nav {
+            width: 100%;
+            background: linear-gradient(90deg, #232323 0%, #e53935 100%);
+            box-shadow: 0 2px 10px #e5393533;
+            position: sticky;
+            top: 0;
+            z-index: 1002;
+        }
+        .main-nav ul {
+            margin: 0;
+            padding: 0 0 0 20px;
+            display: flex;
+            list-style: none;
+            height: 48px;
+            align-items: center;
+        }
+        .main-nav li {
+            margin-right: 30px;
+        }
+        .main-nav a {
+            color: #ffb300;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            padding: 10px 8px 8px 8px;
+            border-bottom: 2.5px solid transparent;
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+        .main-nav a.active, .main-nav a:hover {
+            color: #fff;
+            border-bottom: 2.5px solid #ffb300;
+            text-shadow: 0 0 8px #ffb300;
+        }
+        /* Меню для админов (отдельно, как главное меню) */
+        .admin-nav {
+            width: 100%;
+            background: linear-gradient(90deg, #232323 0%, #ffb300 100%);
+            box-shadow: 0 2px 10px #ffb30033;
+            position: sticky;
+            top: 48px;
+            z-index: 1001;
+        }
+        .admin-nav ul {
+            margin: 0;
+            padding: 0 0 0 20px;
+            display: flex;
+            list-style: none;
+            height: 44px;
+            align-items: center;
+        }
+        .admin-nav li {
+            margin-right: 24px;
+        }
+        .admin-nav a {
+            color: #e53935;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05em;
+            letter-spacing: 1px;
+            padding: 8px 8px 6px 8px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+        .admin-nav a:hover {
+            color: #fff;
+            border-bottom: 2px solid #e53935;
+            text-shadow: 0 0 8px #e53935;
+        }
+        /* Модальные окна */
+        #modal, #payModal {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+        #modal > div, #payModal > div {
+            background: linear-gradient(120deg, #232323 60%, #e53935 120%);
+            color: #fff;
+            border: 2px solid #ffb300;
+            box-shadow: 0 4px 24px #e5393555;
+        }
+        #modal input {
+            background: #fff3e0;
+            color: #232323;
+            border: 1.5px solid #ffb300;
+        }
+        #modal input:focus {
+            outline: 2px solid #e53935;
+        }
+        #modalMsg {
+            color: #ffb300 !important;
+        }
+        #sendIdBtn, #closePayBtn {
+            background: linear-gradient(90deg, #ffb300 0%, #e53935 100%);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #e5393555, 0 0 8px #ffb30099;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #sendIdBtn:hover, #closePayBtn:hover {
+            background: linear-gradient(90deg, #e53935 0%, #ffb300 100%);
+            box-shadow: 0 4px 16px #ffb300cc, 0 0 16px #e53935cc;
+            transform: scale(1.07);
+        }
+        /* Модальное окно для пароля */
+        #adminPassModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        #adminPassModal > div {
+            background: #232323;
+            color: #fff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 4px 16px #e5393555;
+            text-align: center;
+            position: relative;
+        }
+        #adminPassModal input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1.5px solid #ffb300;
+            border-radius: 5px;
+            font-size: 1em;
+            background: #fff3e0;
+            color: #232323;
+        }
+        #adminPassModal input:focus {
+            outline: 2px solid #e53935;
+        }
+        #adminPassMsg {
+            margin-top: 10px;
+            color: #e53935;
+            display: none;
+        }
+        #adminPassBtn {
+            background: linear-gradient(90deg, #ffb300 0%, #e53935 100%);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #e5393555, 0 0 8px #ffb30099;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #adminPassBtn:hover {
+            background: linear-gradient(90deg, #e53935 0%, #ffb300 100%);
+            box-shadow: 0 4px 16px #ffb300cc, 0 0 16px #e53935cc;
+            transform: scale(1.07);
+        }
+        /* Анимация для модальных окон */
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes modalOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+        #modal, #payModal, #adminPassModal {
+            animation-duration: 0.4s;
+            animation-fill-mode: both;
+        }
+        #modal.show, #payModal.show, #adminPassModal.show {
+            animation-name: modalIn;
+        }
+        #modal.hide, #payModal.hide, #adminPassModal.hide {
+            animation-name: modalOut;
+        }
+        footer {
+            background: linear-gradient(90deg, #232323 0%, #e53935 100%);
+            color: #fff;
+            text-align: center;
+            padding: 22px 0 10px 0;
+            margin-top: 40px;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            border-top: 2px solid #ffb300;
+            box-shadow: 0 -2px 12px #e5393555;
+        }
+        footer a {
+            color: #ffb300;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        footer a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px #ffb300;
+        }
+        @media (max-width: 700px) {
+            .main-nav ul, .admin-nav ul { flex-direction: column; height: auto; padding: 0; }
+            .main-nav li, .admin-nav li { margin: 0 0 8px 0; }
+        }
+    </style>
+</head>
+<body>
+  
+    <!-- Главное меню -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="active">Главная</a></li>
+      </ul>
+    </nav>
+    <!-- Меню для админов (отдельно, как главное меню) -->
+    <nav class="admin-nav">
+      <ul>
+        <li><a href="#add">Добавить товар</a></li>
+        <li><a href="#orders">Заказы</a></li>
+        <li><a href="#logout">Выйти</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Выберите пакет алмазов</h2>
+        <div class="diamond-packages">
+            <!-- Пример одного пакета -->
+            <div class="package-item">
+                <img src="100.jpg" alt="100 Алмазов" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>100 Алмазов</h3>
+                <p>Цена: 12см</p>
+                <button>Купить</button>
+            </div>
+            <!-- Повторите этот блок для других пакетов -->
+            <div class="package-item">
+                <img src="300.jpg" alt="310 Алмазов" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>310 Алмазов</h3>
+                <p>Цена: 35см</p>
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="500.jpg" alt="520 Алмазов" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>520 Алмазов</h3>
+                <p>Цена: 65см</p>
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="1000.jpg" alt="1060 Алмазов" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>1060 Алмазов</h3>
+                <p>Цена: 130 см</p>
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="2000.jpg" alt="2180 Алмазов" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>2180 Алмазов</h3>
+                <p>Цена: 250см</p>
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="5000.jpg" alt="5600 Алмазов" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>5600 Алмазов</h3>
+                <p>Цена: 700см</p>
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="vn.jpg" alt="Ваучер на неделю" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>Ваучер на неделю</h3>
+                <p>Цена: 23см</p> <!-- Примерная цена -->
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="vm.jpg" alt="Ваучер на месяц" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>Ваучер на месяц</h3>
+                <p>Цена: 120см</p> <!-- Примерная цена -->
+                <button>Купить</button>
+            </div>
+ <div class="package-item">
+                <img src="pp.jpg" alt="Пропуск прокачки" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>Пропуск прокачки</h3>
+                <p>Цена: 36см</p> <!-- Примерная цена -->
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="e.jpg" alt="Значок E на 3 дня" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>Значок E (3 дня)</h3>
+                <p>Цена: 6 см</p> <!-- Примерная цена -->
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="e.jpg" alt="Значок E на 7 дней" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>Значок E (7 дней)</h3>
+                <p>Цена: 12см</p> <!-- Примерная цена -->
+                <button>Купить</button>
+            </div>
+            <div class="package-item">
+                <img src="e.jpg" alt="Значок E на 30 дней" style="width:100px; height:100px; object-fit:cover; margin-bottom:10px;">
+                <h3>Значок E (30 дней)</h3>
+                <p>Цена: 36см</p> <!-- Примерная цена -->
+                <button>Купить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Меню заказов для админа -->
+    <div id="ordersMenu" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; justify-content:center; align-items:flex-start; overflow:auto;">
+      <div style="background:#232323; color:#fff; padding:32px 20px 24px 20px; border-radius:14px; max-width:420px; width:95%; margin:40px auto; box-shadow:0 4px 32px #e5393555; position:relative;">
+        <button id="closeOrdersMenu" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5em; color:#e53935; cursor:pointer;">&times;</button>
+        <h2 style="color:#ffb300; margin-bottom:18px;">Список заказов (ID)</h2>
+        <div id="ordersList" style="max-height:350px; overflow-y:auto; background:#181818; border-radius:8px; padding:10px 8px; border:1.5px solid #ffb300; font-size:1.1em;"></div>
+        <button id="clearOrdersBtn" style="margin-top:18px; background:linear-gradient(90deg,#e53935 0%,#ffb300 100%); color:#fff; border:none; border-radius:7px; padding:10px 24px; font-size:1em; font-weight:bold; cursor:pointer;">Очистить список</button>
+      </div>
+    </div>
+
+    <!-- Модальное окно для ввода игрового ID -->
+    <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+      <div style="background:#fff; padding:30px 20px; border-radius:10px; max-width:350px; width:90%; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; position:relative;">
+        <button id="closeModal" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5em; color:#e53935; cursor:pointer;">&times;</button>
+        <h2 style="color:#e53935; margin-bottom:15px;">Введите игровой ID</h2>
+        <input id="gameIdInput" type="text" placeholder="Ваш игровой ID" style="width:90%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px; font-size:1em;">
+        <br>
+        <button id="sendIdBtn" style="background:#4caf50; color:#fff; border:none; border-radius:5px; padding:10px 20px; font-size:1em; cursor:pointer;">Отправить</button>
+        <div id="modalMsg" style="margin-top:10px; color:#388e3c; display:none;"></div>
+      </div>
+    </div>
+
+    <!-- Модальное окно для оплаты -->
+    <div id="payModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1100; justify-content:center; align-items:center;">
+      <div style="background:#fff; padding:30px 20px; border-radius:10px; max-width:350px; width:90%; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; position:relative;">
+        <button id="closePayModal" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5em; color:#e53935; cursor:pointer;">&times;</button>
+        <h2 style="color:#e53935; margin-bottom:15px;">Оплата</h2>
+        <div style="font-size:1.1em; margin-bottom:10px; color:#ffb300;">Спасибо! Ваш ID отправлен.</div>
+        <div style="margin-bottom:15px; color:#ffb300;">Оплатите на номер:<br><b style="color:#e53935; font-size:1.3em;">928001558</b></div>
+        <div style="margin-bottom:10px; color:#e53935; font-weight:bold;">Отправьте чек оплаты:</div>
+        <input type="file" id="payCheckInput" accept="image/*" style="margin-bottom:10px;" />
+        <br>
+        <button id="sendPayCheckBtn" style="background:#ffb300; color:#fff; border:none; border-radius:5px; padding:10px 20px; font-size:1em; cursor:pointer; margin-bottom:10px;">Отправить чек</button>
+        <div id="payCheckMsg" style="margin-bottom:10px; color:#388e3c; display:none;"></div>
+        <button id="closePayBtn" style="background:#4caf50; color:#fff; border:none; border-radius:5px; padding:10px 20px; font-size:1em; cursor:pointer;">Закрыть</button>
+      </div>
+    </div>
+
+    <!-- Модальное окно для пароля -->
+    <div id="adminPassModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2000; justify-content:center; align-items:center;">
+      <div style="background:#232323; color:#fff; padding:30px 20px; border-radius:10px; max-width:350px; width:90%; box-shadow:0 4px 16px #e5393555; text-align:center; position:relative;">
+        <button id="closeAdminPassModal" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5em; color:#e53935; cursor:pointer;">&times;</button>
+        <h2 style="color:#ffb300; margin-bottom:15px;">Введите пароль администратора</h2>
+        <input id="adminPassInput" type="password" placeholder="Пароль" style="width:90%; padding:10px; margin-bottom:15px; border:1.5px solid #ffb300; border-radius:5px; font-size:1em;">
+        <br>
+        <button id="adminPassBtn" style="background:linear-gradient(90deg,#ffb300 0%,#e53935 100%); color:#fff; border:none; border-radius:7px; padding:10px 24px; font-size:1em; font-weight:bold; cursor:pointer;">Войти</button>
+        <div id="adminPassMsg" style="margin-top:10px; color:#e53935; display:none;"></div>
+      </div>
+    </div>
+
+    <script>
+      // Открытие модального окна при нажатии на любую кнопку "Купить"
+      document.querySelectorAll('.package-item button').forEach((btn, idx) => {
+        btn.addEventListener('click', function() {
+          // Получаем данные о пакете
+          const packageItem = btn.closest('.package-item');
+          const img = packageItem.querySelector('img');
+          const title = packageItem.querySelector('h3').textContent;
+          const imgSrc = img.getAttribute('src');
+          // Сохраняем данные выбранного пакета во временное хранилище
+          sessionStorage.setItem('selected_package', JSON.stringify({title, imgSrc}));
+          document.getElementById('modal').style.display = 'flex';
+          document.getElementById('gameIdInput').value = '';
+          document.getElementById('modalMsg').style.display = 'none';
+        });
+      });
+      // Закрытие модального окна
+      document.getElementById('closeModal').onclick = function() {
+        document.getElementById('modal').style.display = 'none';
+      };
+      // Отправка ID (здесь просто выводим сообщение, можно доработать)
+      let lastOrderId = null;
+      // Модифицируем sendIdBtn, чтобы запоминать последний заказ
+      const origSendIdBtn = document.getElementById('sendIdBtn').onclick;
+      document.getElementById('sendIdBtn').onclick = function() {
+        const id = document.getElementById('gameIdInput').value.trim();
+        if (id.length < 3) {
+          document.getElementById('modalMsg').style.display = 'block';
+          document.getElementById('modalMsg').style.color = '#e53935';
+          document.getElementById('modalMsg').textContent = 'Пожалуйста, введите корректный ID!';
+          return;
+        }
+        // Получаем выбранный пакет
+        let pkg = {};
+        try { pkg = JSON.parse(sessionStorage.getItem('selected_package') || '{}'); } catch(e) {}
+        // Сохраняем ID и пакет в localStorage
+        let ids = JSON.parse(localStorage.getItem('orders_ids') || '[]');
+        const order = {id: id, date: new Date().toLocaleString(), title: pkg.title || '', imgSrc: pkg.imgSrc || '', payCheck: ''};
+        ids.push(order);
+        localStorage.setItem('orders_ids', JSON.stringify(ids));
+        lastOrderId = id;
+        document.getElementById('modal').style.display = 'none';
+        document.getElementById('payModal').style.display = 'flex';
+      };
+      // Закрытие окна оплаты
+      document.getElementById('closePayModal').onclick = function() {
+        document.getElementById('payModal').style.display = 'none';
+      };
+      document.getElementById('closePayBtn').onclick = function() {
+        document.getElementById('payModal').style.display = 'none';
+      };
+      // Закрытие по клику вне окна
+      document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
+      });
+      // Закрытие по клику вне окна оплаты
+      document.getElementById('payModal').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
+      });
+      // Admin menu password modal logic
+      document.querySelectorAll('.admin-nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('adminPassModal').style.display = 'flex';
+          document.getElementById('adminPassInput').value = '';
+          document.getElementById('adminPassMsg').style.display = 'none';
+          // Save the href to redirect after password
+          document.getElementById('adminPassBtn').setAttribute('data-href', this.getAttribute('href'));
+        });
+      });
+      document.getElementById('closeAdminPassModal').onclick = function() {
+        document.getElementById('adminPassModal').style.display = 'none';
+      };
+      document.getElementById('adminPassBtn').onclick = function() {
+        const pass = document.getElementById('adminPassInput').value.trim();
+        const href = this.getAttribute('data-href');
+        if (pass === '14.02.2025') {
+          document.getElementById('adminPassModal').style.display = 'none';
+          if (href === '#orders') {
+            showOrdersMenu();
+            return;
+          }
+          if (href && href !== '#logout') window.location.hash = href;
+          if (href === '#logout') alert('Выход из админки!');
+        } else {
+          document.getElementById('adminPassMsg').style.display = 'block';
+          document.getElementById('adminPassMsg').textContent = 'Неверный пароль!';
+        }
+      };
+      document.getElementById('adminPassModal').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
+      });
+      // --- ДОБАВЛЕНО: логика отправки чека оплаты ---
+      // Кнопка отправки чека
+      const payCheckInput = document.getElementById('payCheckInput');
+      const payCheckMsg = document.getElementById('payCheckMsg');
+      document.getElementById('sendPayCheckBtn').onclick = function() {
+        const file = payCheckInput.files[0];
+        if (!file) {
+          payCheckMsg.style.display = 'block';
+          payCheckMsg.style.color = '#e53935';
+          payCheckMsg.textContent = 'Пожалуйста, выберите изображение чека!';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          // Сохраняем base64 изображение в заказ
+          let ids = JSON.parse(localStorage.getItem('orders_ids') || '[]');
+          // Ищем последний заказ по lastOrderId
+          for (let i = ids.length - 1; i >= 0; i--) {
+            if (ids[i].id === lastOrderId) {
+              ids[i].payCheck = e.target.result;
+              break;
+            }
+          }
+          localStorage.setItem('orders_ids', JSON.stringify(ids));
+          payCheckMsg.style.display = 'block';
+          payCheckMsg.style.color = '#388e3c';
+          payCheckMsg.textContent = 'Чек успешно отправлен!';
+          payCheckInput.value = '';
+        };
+        reader.readAsDataURL(file);
+      };
+      // --- Логика для меню заказов (ordersMenu) ---
+      function showOrdersMenu() {
+        const menu = document.getElementById('ordersMenu');
+        const listDiv = document.getElementById('ordersList');
+        let ids = JSON.parse(localStorage.getItem('orders_ids') || '[]');
+        if (ids.length === 0) {
+          listDiv.innerHTML = '<div style="color:#e53935;">Нет заказов.</div>';
+        } else {
+          let html = '<table style="width:100%; border-collapse:collapse;">';
+          html += '<tr><th></th><th style="color:#ffb300; text-align:left; padding:4px 0;">ID</th><th style="color:#ffb300; text-align:left; padding:4px 0;">Пакет</th><th style="color:#ffb300; text-align:left; padding:4px 0;">Время</th><th style="color:#ffb300; text-align:left; padding:4px 0;">Чек</th></tr>';
+          ids.slice().reverse().forEach((item, idx) => {
+            html += `<tr>`;
+            html += `<td style=\"padding:3px 6px 3px 0;\">${item.imgSrc ? `<img src='${item.imgSrc}' alt='' style='width:38px; height:38px; object-fit:cover; border-radius:6px; border:1.5px solid #ffb300;' class='order-img order-img-small' data-type='package' data-idx='${idx}'>` : ''}</td>`;
+            html += `<td style=\"padding:3px 0;\">${item.id}</td>`;
+            html += `<td style=\"padding:3px 0; color:#ffb300; font-size:0.98em;\">${item.title || ''}</td>`;
+            html += `<td style=\"padding:3px 0; font-size:0.95em; color:#bbb;\">${item.date}</td>`;
+            html += `<td style=\"padding:3px 0;\">${item.payCheck ? `<img src='${item.payCheck}' alt='Чек' style='width:38px; height:38px; object-fit:cover; border-radius:6px; border:1.5px solid #4caf50;' class='order-img order-img-small' data-type='paycheck' data-idx='${idx}'>` : '<span style=\'color:#e53935; font-size:0.95em;\'>Нет</span>'}</td>`;
+            html += `</tr>`;
+          });
+          html += '</table>';
+          listDiv.innerHTML = html;
+          // Добавляем обработчик увеличения для всех изображений заказа
+          setTimeout(() => {
+            document.querySelectorAll('.order-img').forEach(img => {
+              img.onclick = function() {
+                if (this.classList.contains('order-img-large')) {
+                  this.classList.remove('order-img-large');
+                  this.classList.add('order-img-small');
+                  this.style.position = '';
+                  this.style.zIndex = '';
+                  this.style.width = '38px';
+                  this.style.height = '38px';
+                  this.style.maxWidth = '';
+                  this.style.maxHeight = '';
+                  this.style.boxShadow = '';
+                  this.style.background = '';
+                  this.style.left = '';
+                  this.style.top = '';
+                  this.style.transform = '';
+                } else {
+                  this.classList.remove('order-img-small');
+                  this.classList.add('order-img-large');
+                  this.style.position = 'fixed';
+                  this.style.zIndex = '9999';
+                  this.style.width = 'min(90vw, 420px)';
+                  this.style.height = 'auto';
+                  this.style.maxWidth = '95vw';
+                  this.style.maxHeight = '90vh';
+                  this.style.left = '50%';
+                  this.style.top = '50%';
+                  this.style.transform = 'translate(-50%, -50%)';
+                  this.style.boxShadow = '0 8px 40px #000b, 0 0 0 9999px rgba(0,0,0,0.7)';
+                  this.style.background = '#fff';
+                }
+              };
+            });
+          }, 10);
+        }
+        menu.style.display = 'flex';
+      }
+      document.getElementById('closeOrdersMenu').onclick = function() {
+        document.getElementById('ordersMenu').style.display = 'none';
+      };
+      document.getElementById('ordersMenu').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
+      });
+      document.getElementById('clearOrdersBtn').onclick = function() {
+        if (confirm('Очистить все заказы?')) {
+          localStorage.removeItem('orders_ids');
+          // Мгновенно обновляем интерфейс
+          document.getElementById('ordersList').innerHTML = '<div style="color:#e53935;">Нет заказов.</div>';
+        }
+      };
+    </script>
+
+    <footer>
+        <p>Для покупки или вопросов звоните или напишите на whatsapp: <a href="tel:+992907261159">+992 92 800 1558</a></p>
+        <p>&copy; 2025 Ваш Магазин Алмазов. Все права защищены.</p>
+    </footer>
+</body>
+</html>
